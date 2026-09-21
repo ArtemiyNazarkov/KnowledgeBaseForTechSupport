@@ -1,0 +1,29 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addedit.css') }}">
+
+<form action="{{ url_for('edit_reference_document', id=reference_document.id) }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {% if reference_document.path_spravochnogo_dokumenta %}
+        <p>Текущий файл: {{ reference_document.path_spravochnogo_dokumenta }}</p>
+        {% endif %}
+  <div class="form-floating">
+        {{ form.path_spravochnogo_dokumenta(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.path_spravochnogo_dokumenta.label() }}</label>
+    </div>
+    <div class="form-floating">
+        {{ form.spravochniy_dokument(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.spravochniy_dokument.label() }}</label>
+    </div>
+
+    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}
+    {% if form.path_spravochnogo_dokumenta.errors %}
+        <div class="alert alert-danger">
+            {% for error in form.path_spravochnogo_dokumenta.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</form>
+{% endblock %}

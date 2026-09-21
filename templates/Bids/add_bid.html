@@ -1,0 +1,113 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addedit.css') }}">
+
+<form action="{{ url_for('add_bid') }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+<div class="form-floating">
+    {{ form.kod_sistemy(class="form-control", id="my-input1", list="id_datalist1") }}
+    <label for="id_datalist1">{{ form.kod_sistemy.label }}</label>
+    <datalist id="id_datalist1">
+        {% for system in systems %}
+            <option value="{{ system.naimenovanie_sistemy }}">
+        {% endfor %}
+    </datalist>
+</div>
+<div class="form-floating">
+    {{ form.kod_modulya(class="form-control", id="my-input2", list="id_datalist2", disabled="disabled") }}
+    <label for="id_datalist2">{{ form.kod_modulya.label }}</label>
+    <datalist id="id_datalist2">
+        {% for module in modules %}
+            <option value="{{ module.naimenovanie_modulya }}">
+        {% endfor %}
+    </datalist>
+</div>
+<div class="form-floating">
+    {{ form.kod_prilozheniya(class="form-control", id="my-input3", list="id_datalist3", disabled="disabled") }}
+    <label for="id_datalist3">{{ form.kod_prilozheniya.label }}</label>
+    <datalist id="id_datalist3">
+        {% for application in applications %}
+            <option value="{{ application.naimenovanie_prilozheniya }}">
+        {% endfor %}
+    </datalist>
+</div>
+
+{#    {{ form.update_choices(class="w-100 btn btn-lg btn-primary", type="submit") }}#}
+{#    <div class="form-floating">#}
+{#    {{ form.kod_sistemy(class="form-control", id="my-input1") }}#}
+{#    <label for="my-input1">{{ form.kod_sistemy.label }}</label>#}
+{#</div>#}
+{#<div class="form-floating">#}
+{#    {{ form.kod_modulya(class="form-control", id="my-input2") }}#}
+{#    <label for="my-input2">{{ form.kod_modulya.label }}</label>#}
+{#</div>#}
+{#    <div class="form-floating">#}
+{#    <button type="button" class="btn btn-primary"#}
+{#            id="reset-button"><i class="bi bi-arrow-repeat"></i><span> Сбросить</span></button></div>#}
+{#<div class="form-floating">#}
+{#    {{ form.kod_prilozheniya(class="form-control", id="my-input3") }}#}
+{#    <label for="my-input3">{{ form.kod_prilozheniya.label }}</label>#}
+{#</div>#}
+
+    <label for="opisanie">{{ form.opisanie.label() }}</label>
+    <div class="form-floating">
+        <div id="editor1">{{ form.opisanie() }}</div>
+        <input type="hidden" id="opisanie" name="opisanie">
+    </div>
+    <label for="reshenie">{{ form.reshenie.label() }}</label>
+    <div class="form-floating">
+        <div id="editor2">{{ form.reshenie() }}</div>
+        <input type="hidden" id="reshenie" name="reshenie">
+    </div>
+
+    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}
+</form>
+{% endblock %}
+
+{#{% extends 'upperbase.html' %}#}
+{#{% block content %}#}
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='css/addedit.css') }}">#}
+{##}
+{#<form action="{{ url_for('add_bid') }}" method="post" enctype="multipart/form-data">#}
+{#    {{ form.hidden_tag() }}#}
+{#<div class="form-floating">#}
+{#    {{ form.kod_sistemy(class="form-control", id="my-input1", list="id_datalist1") }}#}
+{#    <label for="id_datalist1">{{ form.kod_sistemy.label }}</label>#}
+{#    <datalist id="id_datalist1">#}
+{#        {% for system in systems %}#}
+{#            <option value="{{ system.naimenovanie_sistemy }}&nbsp;">#}
+{#        {% endfor %}#}
+{#    </datalist>#}
+{#</div>#}
+{#<div class="form-floating">#}
+{#    {{ form.kod_modulya(class="form-control", id="my-input2", list="id_datalist2") }}#}
+{#    <label for="id_datalist2">{{ form.kod_modulya.label }}</label>#}
+{#    <datalist id="id_datalist2">#}
+{#        {% for module in modules %}#}
+{#            <option value="{{ module.naimenovanie_modulya }}&nbsp;">#}
+{#        {% endfor %}#}
+{#    </datalist>#}
+{#</div>#}
+{#<div class="form-floating">#}
+{#    {{ form.kod_prilozheniya(class="form-control", id="my-input3", list="id_datalist3") }}#}
+{#    <label for="id_datalist3">{{ form.kod_prilozheniya.label }}</label>#}
+{#    <datalist id="id_datalist3">#}
+{#        {% for application in applications %}#}
+{#            <option value="{{ application.naimenovanie_prilozheniya }}&nbsp;">#}
+{#        {% endfor %}#}
+{#    </datalist>#}
+{#</div>#}
+{#    <label for="opisanie">{{ form.opisanie.label() }}</label>#}
+{#    <div class="form-floating">#}
+{#        <div id="editor1">{{ form.opisanie() }}</div>#}
+{#        <input type="hidden" id="opisanie" name="opisanie">#}
+{#    </div>#}
+{#    <label for="reshenie">{{ form.reshenie.label() }}</label>#}
+{#    <div class="form-floating">#}
+{#        <div id="editor2">{{ form.reshenie() }}</div>#}
+{#        <input type="hidden" id="reshenie" name="reshenie">#}
+{#    </div>#}
+{##}
+{#    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}#}
+{#</form>#}
+{#{% endblock %}#}

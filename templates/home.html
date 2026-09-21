@@ -1,0 +1,127 @@
+{% extends 'upperbase.html' %}
+{% set is_home_page = true %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <div class="container mt-4">
+    <div class="row mb-3">
+    <div class="row">
+      <h4 class="fw-bold">Работа с заявками</h4>
+        <div class="col">
+      <a class="nav-link main-page-link" href="{{ url_for('add_bid') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-clipboard-plus fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Добавить решение</span>
+        </div>
+      </a>
+    </div>
+        <div class="col">
+      <a class="nav-link main-page-link" href="{{ url_for('tab_standard_answers') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-archive fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Стандартные ответы</span>
+        </div>
+      </a>
+    </div>
+        <div class="col">
+      <a class="nav-link main-page-link" href="{{ url_for('tab_useful_links') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-link fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Полезные ссылки</span>
+        </div>
+      </a>
+            </div>
+    </div>
+  </div>
+    <div class="row mb-3">
+
+  </div>
+  <div class="row mb-3">
+    <div class="row">
+        <div class="col">
+      <a class="nav-link main-page-link" href="{{ url_for('tab_users') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-person fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Пользователи</span>
+        </div>
+      </a>
+    </div>
+
+        <div class="col">
+      <a class="nav-link main-page-link" href="{{ url_for('tab_sql_requests') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-filetype-sql fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Выгрузка данных</span>
+        </div>
+      </a>
+            </div>
+        <div class="col">
+        <a class="nav-link main-page-link" href="{{ url_for('tab_loader_templates') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-cloud-arrow-up fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Шаблоны для Loader'а</span>
+        </div>
+      </a>
+            </div>
+    </div>
+  </div>
+    <div class="row mb-3">
+    <div class="row">
+      <h4 class="fw-bold">Справочники</h4>
+        <div class="col">
+        <a class="nav-link main-page-link" href="{{ url_for('tab_reference_documents') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-file-earmark-text fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Справочные документы</span>
+        </div>
+      </a>
+            </div>
+        <div class="col">
+        <a class="nav-link main-page-link" href="{{ url_for('tab_contacts') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-card-list fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Контакты</span>
+        </div>
+      </a>
+            </div>
+    </div>
+  </div>
+    <div class="row mb-3 flex-wrap">
+    <div class="row">
+      <h4 class="fw-bold">Администрирование базы знаний</h4>
+        <div class="col">
+      <a class="nav-link main-page-link" href="{{ url_for('tab_systems') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-box fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Системы</span>
+        </div>
+      </a>
+            </div>
+        <div class="col">
+        <a class="nav-link main-page-link" href="{{ url_for('tab_modules') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-box2 fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Модули</span>
+        </div>
+      </a>
+            </div>
+        <div class="col">
+        <a class="nav-link main-page-link" href="{{ url_for('tab_applications') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-app fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Приложения</span>
+        </div>
+      </a>
+            </div>
+        <div class="col">
+        <a class="nav-link main-page-link" href="{{ url_for('tab_module_applications') }}">
+        <div class="d-flex align-items-center justify-content-center border rounded p-3">
+          <i class="bi bi-list fs-3 me-2"></i>
+          <span class="mb-0 fs-4">Перечень</span>
+        </div>
+      </a>
+            </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

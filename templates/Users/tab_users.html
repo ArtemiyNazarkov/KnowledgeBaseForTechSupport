@@ -1,0 +1,75 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}">
+    <div class="ms-auto">
+        <div class="row">
+            <div class="col">
+                <a href="{{ url_for('add_user') }}">
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-plus-lg"></i>
+                        Добавить пользователя</button>
+                </a>
+            </div>
+                <div class="col">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                </div>
+            </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-sm table-hover align-middle">
+        <thead>
+            <tr class="table-active">
+                <th><a href="{{ url_for('tab_users', sort='id', order=order) }}">ID</a></th>
+                <th><a href="{{ url_for('tab_users', sort='username', order=order) }}">Логин</a></th>
+                <th><a href="{{ url_for('tab_users', sort='fio', order=order) }}">ФИО</a></th>
+        {#        <th>Пароль (хэшировано)</th>#}
+                <th><a href="{{ url_for('tab_users', sort='isAdmin', order=order) }}">Роль</a></th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.fio }}</td>
+    {#        <td>{{ user.hashed_password }}</td>#}
+            <td>{{ 'Администратор' if user.isAdmin else 'Пользователь' }}</td>
+              <td>
+                  <a href="{{ url_for('edit_user', id=user.id) }}">
+                      <button type="submit" class="btn btn-link">
+                      <i class="bi bi-pen"></i></button></a></td>
+            <td>
+                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#Modal{{ user.id }}">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                </td>
+                <div class="modal fade" id="Modal{{ user.id }}" tabindex="-1" aria-labelledby="ModalLabel{{ user.id }}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="ModalLabel{{ user.id }}">Удаление {{ user.username }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                      </div>
+                      <div class="modal-body">
+                        Вы уверены, что хотите удалить {{ user.username }}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                          <form action="{{ url_for('delete_user', id=user.id) }}" method="post">
+                        <button type="submit" class="btn btn-primary">Удалить</button>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        {% include 'flash_message.html' %}
+    </div>
+{% endblock %}

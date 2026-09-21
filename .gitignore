@@ -1,0 +1,12 @@
+.idea/
+__pycache__/
+build/
+dist/
+flask_session/
+*.egg-info/
+venv/
+instance/
+*.db
+static/Uploaded_Files/
+doklad.txt
+shablon_nk.pptx

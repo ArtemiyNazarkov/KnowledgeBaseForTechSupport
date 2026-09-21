@@ -1,0 +1,38 @@
+{% extends 'upperbase.html' %}
+{% set is_login_page = true %}
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<main class="form-signin w-100 m-auto text-center">
+
+  <form action="{{ url_for('login') }}" method="post">
+      <p>{{ form.hidden_tag() }}</p>
+<img class="mb-4" src="{{ url_for('static', filename='ispeaestoreks.svg') }}" alt="логотип" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Вход в систему</h1>
+
+    <div class="form-floating">
+        {{ form.username(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.username.label() }}</label>
+    </div>
+    <div class="form-floating">
+        {{ form.password(class="form-control", id="floatingPassword") }}
+      <label for="floatingPassword">{{ form.password.label() }}</label>
+    </div>
+    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}
+      <div class="row">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                      <div class="alert alert-dismissible fade show alert-{{ category }}" role="alert">
+                        {{ message }}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                      </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+        </div>
+  </form>
+</main>
+
+
+{% endblock %}

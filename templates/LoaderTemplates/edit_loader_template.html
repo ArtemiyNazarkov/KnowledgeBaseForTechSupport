@@ -1,0 +1,29 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addedit.css') }}">
+
+<form action="{{ url_for('edit_loader_template', id=loader_template.id) }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {% if loader_template.shablon_path %}
+        <p>Текущий файл: {{ loader_template.shablon_path }}</p>
+        {% endif %}
+  <div class="form-floating">
+        {{ form.shablon_path(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.shablon_path.label() }}</label>
+    </div>
+    <div class="form-floating">
+        {{ form.opisanie(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.opisanie.label() }}</label>
+    </div>
+
+    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}
+    {% if form.shablon_path.errors %}
+        <div class="alert alert-danger">
+            {% for error in form.shablon_path.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</form>
+{% endblock %}

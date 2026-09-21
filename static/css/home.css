@@ -1,0 +1,13 @@
+.main-page-link:hover{
+  background-color: dimgrey;
+  color: white;
+    border-radius: 5%;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+/*.main-page-link{*/
+/*  border-radius: 5%;*/
+/*  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/

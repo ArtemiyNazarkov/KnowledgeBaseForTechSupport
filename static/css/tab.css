@@ -1,0 +1,11 @@
+body > main > div.ms-auto {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+th{
+    font-weight: normal;
+}
+p > img {
+    width: 15rem;
+    height: auto;
+}

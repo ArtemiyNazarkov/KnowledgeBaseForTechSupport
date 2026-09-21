@@ -1,0 +1,73 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}">
+        <div class="ms-auto">
+        <div class="row">
+            <div class="col">
+                <a href="{{ url_for('add_application') }}">
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-plus-lg"></i>
+                        Добавить приложение</button>
+                </a>
+            </div>
+                <div class="col">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                </div>
+            </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="myTable" class="table table-sm table-hover align-middle">
+        <thead>
+            <tr class="table-active">
+                <th><a href="{{ url_for('tab_applications', sort='id', order=order) }}">ID</a></th>
+                <th><a href="{{ url_for('tab_applications', sort='naimenovanie_prilozheniya', order=order) }}">Приложение</a></th>
+                <th>Копировать</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for application in applications %}
+          <tr>
+            <td>{{ application.id }}</td>
+            <td><div id="answer{{ application.id }}">{{ application.naimenovanie_prilozheniya }}</div></td>
+              <td>
+            <button class="btn btn-link" onclick="copyToClipboard('answer{{ application.id }}')">
+                <i class="bi bi-clipboard"></i></button>
+            </td>
+              <td>
+                  <a href="{{ url_for('edit_application', id=application.id) }}">
+                      <button type="submit" class="btn btn-link">
+                      <i class="bi bi-pen"></i></button></a></td>
+            <td>
+                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#Modal{{ application.id }}">
+                    <i class="bi bi-x-lg"></i>
+                </button></td>
+                <div class="modal fade" id="Modal{{ application.id }}" tabindex="-1" aria-labelledby="ModalLabel{{ application.id }}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="ModalLabel{{ application.id }}">Удаление приложения {{ application.id }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                      </div>
+                      <div class="modal-body">
+                        Вы уверены, что хотите удалить приложение {{ application.id }}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                          <form action="{{ url_for('delete_application', id=application.id) }}" method="post">
+                        <button type="submit" class="btn btn-primary">Удалить</button>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        {% include 'flash_message.html' %}
+    </div>
+{% endblock %}

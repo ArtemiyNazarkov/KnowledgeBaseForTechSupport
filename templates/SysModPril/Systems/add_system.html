@@ -1,0 +1,21 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addedit.css') }}">
+
+<form action="{{ url_for('add_system') }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+{#    {% if form.naimenovanie_sistemy.errors %}#}
+{#      {% for error in form.naimenovanie_sistemy.errors %}#}
+{#        <div class="alert alert-danger" role="alert">#}
+{#            {{ error }}#}
+{#            </div>#}
+{#      {% endfor %}#}
+{#    {% endif %}#}
+    <div class="form-floating">
+        {{ form.naimenovanie_sistemy(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.naimenovanie_sistemy.label() }}</label>
+    </div>
+
+    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}
+</form>
+{% endblock %}

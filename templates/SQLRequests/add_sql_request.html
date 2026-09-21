@@ -1,0 +1,18 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addedit.css') }}">
+
+<form action="{{ url_for('add_sql_request') }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+  <div class="form-floating">
+        {{ form.zapros(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.zapros.label() }}</label>
+    </div>
+    <div class="form-floating">
+        {{ form.opisanie(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.opisanie.label() }}</label>
+    </div>
+
+    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}
+</form>
+{% endblock %}

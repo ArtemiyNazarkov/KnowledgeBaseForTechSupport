@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+<header class="d-flex navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="{{ url_for('home') }}">ИС ПЭ АЭС ТОРЭКС</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+{#    <div class="d-flex nav-middle left align-items-center">#}
+{#        <a class="d-flex justify-content-start" onclick="goBack()">#}
+{#            <button type="button" class="btn btn-link">#}
+{#            <i class="bi bi-arrow-left "></i>#}
+{#                <span>Назад</span>#}
+{#            </button>#}
+{#        </a>#}
+{#        <h1>{{title}}</h1>#}
+{#    </div>#}
+    <div class="d-flex nav-middle right align-items-center">
+        <a class="d-flex justify-content-end" onclick="copyToClipboardInside('KE')">
+            <button type="button" class="btn btn-link">
+            <i class="bi bi-clipboard"></i>
+                <span>КЕ</span>
+                <span id="KE">{{ record.standardnyi_otvet|striptags }}</span>
+                <span class="KE-text"> Услуга ИТ - Система управления техническим обслуживанием, ремонтом и модернизацией</span>
+            </button>
+        </a>
+    </div>
+    <div class="d-flex nav-middle right align-items-center">
+        <a class="d-flex justify-content-end" href="{{ url_for('add_bid') }}">
+            <button type="button" class="btn btn-link btn-lg" data-bs-toggle="tooltip" data-bs-placement="bottom"
+        data-bs-custom-class="custom-tooltip"
+        data-bs-title="Добавить решение">
+            <i class="bi bi-plus-lg"></i>
+            </button>
+        </a>
+    </div>
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="{{ url_for('logout') }}">Выйти</a>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-4 sidebar-sticky">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{{ url_for('tab_bids') }}">
+            <i class="bi bi-clipboard-plus fs-3 me-2"></i>
+            <span>Заявки</span>
+          </a>
+        </li>
+            <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{{ url_for('tab_standard_answers') }}">
+            <i class="bi bi-archive fs-3 me-2"></i>
+            <span>Стандартные ответы</span>
+          </a>
+        </li>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-start" href="{{ url_for('tab_users') }}">
+                <i class="bi bi-person fs-3 me-2"></i>
+                <span>Доступ к ИС ПЭ АЭС ТОРЭКС</span>
+            </a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link d-flex align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+              <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"></button>
+              <span>Работа с БД</span>
+            </a>
+            <div class="collapse" id="dashboard-collapse">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="{{ url_for('tab_sql_requests') }}" class="nav-link d-flex align-items-center text-decoration-none rounded">
+                    <i class="bi bi-filetype-sql fs-3 me-2"></i><span>SQL запросы</span></a></li>
+                <li><a href="{{ url_for('tab_loader_templates') }}" class="nav-link d-flex align-items-center text-decoration-none rounded">
+                    <i class="bi bi-cloud-arrow-up fs-3 me-2"></i><span>Шаблоны для Loader'а</span></a></li>
+              </ul>
+            </div>
+          </li>
+            <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{{ url_for('tab_useful_links') }}">
+            <i class="bi bi-link fs-3 me-2"></i>
+            <span>Полезные ссылки</span>
+          </a>
+        </li>
+            <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{{ url_for('tab_reference_documents') }}">
+            <i class="bi bi-file-earmark-text fs-3 me-2"></i>
+            <span>Справочные документы</span>
+          </a>
+        </li>
+            <li class="nav-item">
+          <a class="nav-link d-flex align-items-center" href="{{ url_for('tab_contacts') }}">
+            <i class="bi bi-card-list fs-3 me-2"></i>
+            <span>Контакты</span>
+          </a>
+        </li>
+            <li class="nav-item">
+            <a class="nav-link d-flex align-items-center collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse2" aria-expanded="false">
+              <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse2" aria-expanded="false"></button>
+              <span>Администрирование БЗ</span>
+            </a>
+            <div class="collapse" id="dashboard-collapse2">
+              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="{{ url_for('tab_systems') }}" class="nav-link d-flex align-items-center text-decoration-none rounded">
+                    <i class="bi bi-box fs-3 me-2"></i><span>Системы</span></a></li>
+                  <li><a href="{{ url_for('tab_modules') }}" class="nav-link d-flex align-items-center text-decoration-none rounded">
+                    <i class="bi bi-box2 fs-3 me-2"></i><span>Модули</span></a></li>
+                  <li><a href="{{ url_for('tab_applications') }}" class="nav-link d-flex align-items-center text-decoration-none rounded">
+                    <i class="bi bi-app fs-3 me-2"></i><span>Приложения</span></a></li>
+                  <li><a href="{{ url_for('tab_module_applications') }}" class="nav-link d-flex align-items-center text-decoration-none rounded">
+                    <i class="bi bi-list fs-3 me-2"></i><span>Модули и Приложения</span></a></li>
+              </ul>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addedit.css') }}">
+
+<form action="{{ url_for('add_standard_answer') }}" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+  <div class="form-floating">
+        {{ form.naimenovanie_st_otveta(class="form-control", id="floatingInput") }}
+      <label for="floatingInput">{{ form.naimenovanie_st_otveta.label() }}</label>
+    </div>
+    <label for="standardnyi_otvet">{{ form.standardnyi_otvet.label() }}</label>
+    <div class="form-floating">
+        <div id="editor">{{ form.standardnyi_otvet() }}</div>
+        <input type="hidden" id="standardnyi_otvet" name="standardnyi_otvet">
+    </div>
+
+    {{ form.submit(class="w-100 btn btn-lg btn-primary", type="submit") }}
+</form>
+{% endblock %}

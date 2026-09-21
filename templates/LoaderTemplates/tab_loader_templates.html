@@ -1,0 +1,78 @@
+{% extends 'upperbase.html' %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tab.css') }}">
+        <div class="ms-auto">
+        <div class="row">
+            <div class="col">
+                <a href="{{ url_for('add_loader_template') }}">
+                    <button type="button" class="btn btn-primary">
+                        <i class="bi bi-plus-lg"></i>
+                        Добавить шаблон для Loader`а</button>
+                </a>
+            </div>
+                <div class="col">
+                    <input id="searchInput" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Поиск">
+                </div>
+            </div>
+    </div>
+    <div class="table-responsive">
+        <table id="myTable" class="table table-sm table-hover align-middle">
+        <thead>
+            <tr class="table-active">
+                <th><a href="{{ url_for('tab_loader_templates', sort='id', order=order) }}">ID</a></th>
+                <th><a href="{{ url_for('tab_loader_templates', sort='shablon_path', order=order) }}">Шаблон для Loader'а</a></th>
+                <th><a href="{{ url_for('tab_loader_templates', sort='opisanie', order=order) }}">Описание</a></th>
+{#                <th>Скачать</th>#}
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for loader_template in loader_templates %}
+          <tr>
+            <td>{{ loader_template.id }}</td>
+            <td><a href="{{ url_for('static', filename='Uploaded_Files/Loader_Template_Files/' + loader_template.shablon_path) }}" download>
+                {{ loader_template.shablon_path }}</a></td>
+            <td id="answer{{ loader_template.id }}"><pre>{{ loader_template.opisanie }}</pre></td>
+{#              <td>#}
+{#            <button class="btn btn-link" onclick="copyToClipboard('answer{{ loader_template.id }}')">#}
+{#                <i class="bi bi-clipboard"></i></button>#}
+{#            </td>#}
+{#             <td><a href="{{ url_for('static', filename='Uploaded_Files/Loader_Template_Files/' + loader_template.shablon_path) }}" download>#}
+{#                  <button type="submit" class="btn btn-link">#}
+{#                      <i class="bi bi-download"></i></button></a></td>#}
+              <td>
+                  <a href="{{ url_for('edit_loader_template', id=loader_template.id) }}">
+                      <button type="submit" class="btn btn-link">
+                      <i class="bi bi-pen"></i></button></a></td>
+            <td>
+                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#Modal{{ loader_template.id }}">
+                    <i class="bi bi-x-lg"></i>
+                </button></td>
+                <div class="modal fade" id="Modal{{ loader_template.id }}" tabindex="-1" aria-labelledby="ModalLabel{{ loader_template.id }}" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="ModalLabel{{ loader_template.id }}">Удаление шаблона для Loader`а {{ loader_template.id }}</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                      </div>
+                      <div class="modal-body">
+                        Вы уверены, что хотите удалить шаблон для Loader`а {{ loader_template.id }}?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                          <form action="{{ url_for('delete_loader_template', id=loader_template.id) }}" method="post">
+                        <button type="submit" class="btn btn-primary">Удалить</button>
+                          </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        {% include 'flash_message.html' %}
+    </div>
+{% endblock %}
