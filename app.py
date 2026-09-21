@@ -22,7 +22,6 @@ def clean_filename(filename):
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///ISPETOREKS.db'
-app.config['WTF_CSRF_ENABLED'] = False
 os.environ['FLASK_ENV'] = 'production'
 app.secret_key = os.environ.get('FLASK_SECRET_KEY', os.urandom(32).hex())
 db = SQLAlchemy(app)
@@ -35,8 +34,8 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
 
 
-# csrf = CSRFProtect()
-# csrf.init_app(app)
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 class User(UserMixin, db.Model):
     __tablename__ = 'Users'
